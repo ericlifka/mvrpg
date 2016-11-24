@@ -1,5 +1,5 @@
-(function () {
+SM.DefineModule('main', function (require) {
 
-    // start game
+    console.log('hello world');
 
-}());
+});
