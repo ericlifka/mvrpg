@@ -1,5 +1,10 @@
 SM.DefineModule('main', function (require) {
+    const RunLoop = require('util/run-loop');
 
-    console.log('hello world');
+    let loop = new RunLoop(function (dtime) {
+        console.log(dtime);
+    });
+
+    loop.start();
 
 });

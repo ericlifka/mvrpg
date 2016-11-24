@@ -1,4 +1,4 @@
-SM.DefineModule('pxlr/core/run-loop', function (require) {
+SM.DefineModule('util/run-loop', function (require) {
     let fpsCounterDOM = null;
 
     function updateFPScounter(dtime) {
