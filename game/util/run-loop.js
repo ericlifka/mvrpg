@@ -1,5 +1,5 @@
 SM.DefineModule('pxlr/core/run-loop', function (require) {
-  var fpsCounterDOM = null;
+  let fpsCounterDOM = null;
 
   function updateFPScounter(dtime) {
     if (!fpsCounterDOM) {
@@ -9,7 +9,7 @@ SM.DefineModule('pxlr/core/run-loop', function (require) {
       document.body.appendChild(fpsCounterDOM);
     }
 
-    var fps = Math.floor(1000 / dtime * 10) / 10;
+    let fps = Math.floor(1000 / dtime * 10) / 10;
     if (Math.abs(fps - fpsCounterDOM.oldfps) > .2) {
       fpsCounterDOM.oldfps = fps;
       fps = fps + "";
@@ -42,7 +42,7 @@ SM.DefineModule('pxlr/core/run-loop', function (require) {
     return frameTimes;
   }
 
-  return SM.DefineClass([ {
+  return class RunLoop {
     constructor(callback) {
       this.callback = callback || (() => null);
 
@@ -50,7 +50,8 @@ SM.DefineModule('pxlr/core/run-loop', function (require) {
       this.active = false;
       this.lastFrameTime = now();
       this.boundFrameHandler = this.frameHandler.bind(this);
-    },
+    }
+
     frameHandler() {
       if (!this.active) return;
 
@@ -67,23 +68,27 @@ SM.DefineModule('pxlr/core/run-loop', function (require) {
       }
 
       window.requestAnimationFrame(this.boundFrameHandler);
-    },
+    }
+
     start() {
       if (!this.active) {
         this.active = true;
         window.requestAnimationFrame(this.boundFrameHandler);
       }
-    },
+    }
+
     stop() {
       this.active = false;
-    },
+    }
+
     addCallback(callback) {
       this.callback = callback;
-    },
+    }
+
     updateFPScounter(dtime) {
       this.fpsTracker.push(dtime);
 
       updateFPScounter(this.fpsTracker.average());
     }
-  } ]);
+  };
 });
