@@ -12,20 +12,36 @@ SM.DefineModule('main', function (require) {
 
     // let bunny = null;
     let box = new PIXI.Graphics();
-    box.beginFill("0x555555", 1.0);
-    box.drawShape(new PIXI.Rectangle(0, 0, 100, 200));
+    box.lineStyle(5, "0xffffff", 1.0);
+    box.beginFill("0x0000ff", 1.0);
+    // box.drawShape(new PIXI.Rectangle(0, 0, 100, 200));
+
+    box.drawPolygon([
+        550, 100, // Starting x, y coordinates for the star
+        570, 150, // Star is drawn in a clockwork motion
+        630, 155,
+        585, 195,
+        600, 250,
+        550, 220,
+        500, 250,
+        515, 195,
+        470, 155,
+        530, 150,
+        550, 100
+    ]);
+
     stage.addChild(box);
 
     let loop = new RunLoop(function (dtime) {
         // bunny.rotation += 0.01;
-        box.position.x += 5;
-        box.position.y += 5;
-        if (box.position.x > renderer.width) {
-            box.position.x = 0;
-        }
-        if (box.position.y > renderer.height) {
-            box.position.y = 0;
-        }
+        // box.position.x += 5;
+        // box.position.y += 5;
+        // if (box.position.x > renderer.width) {
+        //     box.position.x = 0;
+        // }
+        // if (box.position.y > renderer.height) {
+        //     box.position.y = 0;
+        // }
         renderer.render(stage);
     });
 
