@@ -2,11 +2,45 @@
 <html>
 <head>
   <title>MVRPG</title>
-  <link type="text/css" rel="stylesheet" href="game.css" />
+  <link type="text/css" rel="stylesheet" href="game.css"/>
 </head>
 <body>
 
-  <script src="src/main.js"></script>
+<script src="dependencies/simple-web-modules/index.js"></script>
+
+<script src="dependencies/pxlr/lib/core/cell-grid.js"></script>
+<script src="dependencies/pxlr/lib/core/run-loop.js"></script>
+<script src="dependencies/pxlr/lib/core/RGB-color.js"></script>
+<script src="dependencies/pxlr/lib/core/sprite.js"></script>
+<script src="dependencies/pxlr/lib/gl/gl-frame.js"></script>
+<script src="dependencies/pxlr/lib/gl/buffer-color.js"></script>
+<script src="dependencies/pxlr/lib/gl/dom-helpers.js"></script>
+<script src="dependencies/pxlr/lib/gl/webgl.js"></script>
+
+<script src="src/main.js"></script>
+
+<script id="shader-fs" type="x-shader/x-fragment">
+varying lowp vec4 vColor;
+
+void main(void) {
+    gl_FragColor = vColor;
+}
+</script>
+
+<script id="shader-vs" type="x-shader/x-vertex">
+attribute vec3 aVertexPosition;
+attribute vec4 aVertexColor;
+
+uniform mat4 uMVMatrix;
+uniform mat4 uPMatrix;
+
+varying lowp vec4 vColor;
+
+void main(void) {
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+    vColor = aVertexColor;
+}
+</script>
 
 </body>
 </html>
