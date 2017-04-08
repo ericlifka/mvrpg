@@ -1,15 +1,22 @@
 SM.DefineModule('main', function (require) {
   const RunLoop = require('pxlr/core/run-loop');
   const Renderer = require('pxlr/gl/webgl');
+  const KeyboardInput = require('pxlr/controllers/keyboard-input');
+  const GamepadInput = require('pxlr/controllers/gamepad-input');
 
   const TileRPG = require('game/tile-rpg');
 
   const gameDimensions = {width: 250, height: 150};
-
   const gameInstance = new TileRPG(gameDimensions);
   const renderer = new Renderer(gameDimensions);
+  const keyboardInput = new KeyboardInput();
+  const gamepadInput = new GamepadInput();
   const runLoop = new RunLoop(function (dtime) {
-    gameInstance.processInput([ ]);
+    gameInstance.processInput([
+      keyboardInput.getInputState(),
+      gamepadInput.getInputState()
+    ]);
+
     gameInstance.update(dtime);
 
     let frame = renderer.newRenderFrame();
@@ -29,8 +36,8 @@ SM.DefineModule('main', function (require) {
   });
 
   window.addEventListener("focus", function () {
-    // keyboardInput.clearState();
-    // gamepadInput.clearState();
+    keyboardInput.clearState();
+    gamepadInput.clearState();
     runLoop.start();
   });
 
