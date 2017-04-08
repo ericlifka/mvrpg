@@ -4,10 +4,10 @@ SM.DefineModule('main', function (require) {
   const KeyboardInput = require('pxlr/controllers/keyboard-input');
   const GamepadInput = require('pxlr/controllers/gamepad-input');
 
-  const TileRPG = require('game/tile-rpg');
+  const MVRPGgame = require('mvrpg/game');
 
   const gameDimensions = {width: 250, height: 150};
-  const gameInstance = new TileRPG(gameDimensions);
+  const gameInstance = new MVRPGgame(gameDimensions);
   const renderer = new Renderer(gameDimensions);
   const keyboardInput = new KeyboardInput();
   const gamepadInput = new GamepadInput();
