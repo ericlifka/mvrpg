@@ -5,7 +5,11 @@ SM.DefineModule('mvrpg/game', function (require) {
   return SM.DefineClass([GameEntity, {
     constructor(dimensions) {
       this.dimensions = dimensions;
-      this.tileGrid = new TileGrid();
-    }
+      this.tileGrid = new TileGrid(this, dimensions);
+    },
+
+    init: SM.event(function () {
+      this.children.push(this.tileGrid);
+    })
   }]);
 });
