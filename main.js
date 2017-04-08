@@ -18,6 +18,22 @@ SM.DefineModule('main', function (require) {
     renderer.renderFrame(frame);
   });
 
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      runLoop.stop();
+    }
+  });
+
+  window.addEventListener("blur", function () {
+    runLoop.stop();
+  });
+
+  window.addEventListener("focus", function () {
+    // keyboardInput.clearState();
+    // gamepadInput.clearState();
+    runLoop.start();
+  });
+
   window.activeGame = gameInstance;
   runLoop.start();
 });
