@@ -1,12 +1,13 @@
 SM.DefineModule('mvrpg/screens/tile-grid', function (require) {
   const GameEntity = require('pxlr/core/game-entity');
-
+  const grassSprite = require('mvrpg/tiles/basic-grass');
   const Color = require('pxlr/core/RGB-color');
 
   return SM.DefineClass([GameEntity, {
 
     constructor(parent, dimensions) {
       this.dimensions = dimensions;
+      this.grass = grassSprite();
     },
 
     renderToFrame: SM.event(function (frame) {
@@ -20,6 +21,8 @@ SM.DefineModule('mvrpg/screens/tile-grid', function (require) {
           }
         }
       }
+
+      this.grass.renderToFrame(frame);
     })
 
   }]);
