@@ -1,15 +1,7 @@
 SM.DefineModule('game/tile-rpg', function (require) {
-  return SM.DefineClass([{
-    processInput(inputSources) {
+  const GameEntity = require('pxlr/core/game-entity');
 
-    },
+  return SM.DefineClass([GameEntity, {
 
-    update(dtime) {
-
-    },
-
-    renderToFrame(frame) {
-
-    }
   }]);
 });

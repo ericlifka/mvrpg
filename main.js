@@ -12,15 +12,15 @@ SM.DefineModule('main', function (require) {
   const keyboardInput = new KeyboardInput();
   const gamepadInput = new GamepadInput();
   const runLoop = new RunLoop(function (dtime) {
-    gameInstance.processInput([
+    gameInstance.trigger('processInput', [
       keyboardInput.getInputState(),
       gamepadInput.getInputState()
     ]);
 
-    gameInstance.update(dtime);
+    gameInstance.trigger('update', dtime);
 
     let frame = renderer.newRenderFrame();
-    gameInstance.renderToFrame(frame);
+    gameInstance.trigger('renderToFrame', frame);
 
     renderer.renderFrame(frame);
   });
