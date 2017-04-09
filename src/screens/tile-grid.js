@@ -7,7 +7,14 @@ SM.DefineModule('mvrpg/screens/tile-grid', function (require) {
 
     constructor(parent, dimensions) {
       this.dimensions = dimensions;
-      this.grass = grassSprite();
+
+      this.grid = [
+        [ grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite() ],
+        [ grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite() ],
+        [ grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite() ],
+        [ grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite() ],
+        [ grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite() ]
+      ];
     },
 
     renderToFrame: SM.event(function (frame) {
@@ -22,7 +29,11 @@ SM.DefineModule('mvrpg/screens/tile-grid', function (require) {
         }
       }
 
-      this.grass.renderToFrame(frame);
+      this.grid.forEach((row, y) => {
+        row.forEach((sprite, x) => {
+          sprite.renderToFrame(frame, x * 32, y * 32);
+        });
+      });
     })
 
   }]);
