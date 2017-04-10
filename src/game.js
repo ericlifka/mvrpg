@@ -14,6 +14,27 @@ SM.DefineModule('mvrpg/game', function (require) {
     init: SM.event(function () {
       this.children.push(this.tileGrid);
       this.children.push(this.cursor);
-    })
+    }),
+
+    update: SM.event(function (dtime, inputSources) {
+      inputSources.forEach(input => {
+        if (input.INPUT_TYPE === "keyboard") {
+
+          if (input.W){
+            this.cursor.position.y += 32;
+          }
+          if (input.A) {
+            this.cursor.position.x -= 32;
+          }
+          if (input.S) {
+            this.cursor.position.y -= 32;
+          }
+          if (input.D) {
+            this.cursor.position.x += 32;
+          }
+
+        }
+      });
+    }),
   }]);
 });
