@@ -18,16 +18,16 @@ SM.DefineModule('mvrpg/screens/tile-grid', function (require) {
     },
 
     renderToFrame: SM.event(function (frame) {
-      let red = new Color(256, 0, 0);
-
-      for (let w = 0; w <= this.dimensions.width; w++) {
-        for (let h = 0; h <= this.dimensions.height; h++) {
-          if (w % 32 === 0 || h % 32 === 0) {
-            let frameColor = frame.cellAt(w, h);
-            frameColor.copyFromColor(red);
-          }
-        }
-      }
+      // let red = new Color(256, 0, 0);
+      //
+      // for (let w = 0; w <= this.dimensions.width; w++) {
+      //   for (let h = 0; h <= this.dimensions.height; h++) {
+      //     if (w % 32 === 0 || h % 32 === 0) {
+      //       let frameColor = frame.cellAt(w, h);
+      //       frameColor.copyFromColor(red);
+      //     }
+      //   }
+      // }
 
       this.grid.forEach((row, y) => {
         row.forEach((sprite, x) => {
