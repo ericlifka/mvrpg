@@ -8,6 +8,15 @@ SM.DefineModule('mvrpg/screens/level-manager', function (require) {
     constructor(parent, dimensions) {
       this.dimensions = dimensions;
       this.cursor = new Cursor(this);
+      this.center_offset = {
+        x: Math.floor(this.dimensions.width / 2),
+        y: Math.floor(this.dimensions.height / 2)
+      };
+
+      this.active_tile = {
+        x: 0,
+        y: 0
+      };
 
       this.grid = [
         [ grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite(), grassSprite() ],
@@ -19,7 +28,7 @@ SM.DefineModule('mvrpg/screens/level-manager', function (require) {
     },
 
     init: SM.event(function () {
-      this.children.push(this.cursor);
+      // this.children.push(this.cursor);
     }),
 
     update: SM.event(function (dtime, inputSources) {
@@ -46,9 +55,16 @@ SM.DefineModule('mvrpg/screens/level-manager', function (require) {
     renderToFrame: SM.event(function (frame) {
       this.grid.forEach((row, y) => {
         row.forEach((sprite, x) => {
-          sprite.renderToFrame(frame, x * 32, y * 32);
+          sprite.renderToFrame(
+            frame,
+            (x - this.active_tile.x) * 32 + this.center_offset.x,
+            (y - this.active_tile.y) * 32 + this.center_offset.y,
+            1
+          );
         });
       });
+
+      this.cursor.sprite.renderToFrame(frame, this.center_offset.x, this.center_offset.y, 10);
     })
 
   }]);

@@ -6,7 +6,7 @@ SM.DefineModule('mvrpg/game', function (require) {
   return SM.DefineClass([GameEntity, {
     constructor(dimensions) {
       this.dimensions = dimensions;
-      this.levelManager = new LevelManager(this, this.dimensions);
+      this.levelManager = new LevelManager(this, dimensions);
     },
 
     init: SM.event(function () {
